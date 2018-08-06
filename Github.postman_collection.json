@@ -1,0 +1,399 @@
+{
+	"info": {
+		"_postman_id": "e52cf7e3-3eba-428a-b9f8-39cf567e8e57",
+		"name": "Github",
+		"description": "Testing endpoint ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Github User endpoint - Authenticate private user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ac3f299e-8709-4c53-afd0-9c92fd9842cf",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Validate login json data\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.login).to.eql(\"rseemaa\");",
+							"});",
+							"",
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"",
+							"",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "Mysore@12345",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "rseemaa@gmail.com",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://api.github.com/user",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"user"
+					]
+				},
+				"description": "This collection validates GET user endpoint\nhttps://api.github.com/user"
+			},
+			"response": []
+		},
+		{
+			"name": "Github User endpoint - Authenticating with invalid credentials",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "42746688-076a-4878-944b-1b5d6e6abbda",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {",
+							"    pm.response.to.have.status(401);",
+							"});",
+							"",
+							"pm.test(\"Validate bad credential message\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.message).to.eql(\"Bad credentials\");",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "rseemaa@gmail.com",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "dfdsf",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://api.github.com/user",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"user"
+					]
+				},
+				"description": "This collection validates GET user endpoint https://api.github.com/user for Authenticating with invalid credentials"
+			},
+			"response": []
+		},
+		{
+			"name": "GitHub User endpoint - Get All users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "815e4afa-77c0-4605-99f9-b9e736b9dde3",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "Mysore@12345",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "rseemaa@gmail.com",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "v3"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "https://api.github.com/users?page=2",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GitHub User endpoint - Hovercard",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ea02b80e-6265-4295-995c-46504cec37ba",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"",
+							"",
+							"pm.test(\"Body matches string repository\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"repository\");",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "Mysore@12345",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "rseemaa@gmail.com",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/vnd.github.hagar-preview+json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "https://api.github.com/users/octocat/hovercard?subject_type=repository&subject_id=1300192",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"users",
+						"octocat",
+						"hovercard"
+					],
+					"query": [
+						{
+							"key": "subject_type",
+							"value": "repository"
+						},
+						{
+							"key": "subject_id",
+							"value": "1300192"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GitHub User endpoint - Update user information",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "27aa0de1-c7c2-4eac-941f-dd36c90ebe3f",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Validate hirable\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.hireable).to.eql(true);",
+							"});",
+							"",
+							"pm.test(\"Validate location\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.location).to.eql(\"Minneapolis\");",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "Mysore@12345",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "rseemaa@gmail.com",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company\": \"Oracle\",\r\n  \"location\": \"Minneapolis\",\r\n  \"hireable\": true,\r\n  \"bio\": \"There once...\"\r\n}"
+				},
+				"url": {
+					"raw": "https://api.github.com/user",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"user"
+					]
+				},
+				"description": "Get Favorites"
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "Mysore@12345",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "rseemaa@gmail.com",
+				"type": "string"
+			},
+			{
+				"key": "saveHelperData",
+				"type": "any"
+			},
+			{
+				"key": "showPassword",
+				"value": false,
+				"type": "boolean"
+			}
+		]
+	}
+}
